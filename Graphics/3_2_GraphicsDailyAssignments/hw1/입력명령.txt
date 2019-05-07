@@ -1,0 +1,32 @@
+1+1
+a=4
+type(a)
+
+c = 2.1
+type(c)
+
+3 > 4
+test = (3>4)
+test
+type(test)
+
+
+x = 3
+print(x+1)
+print(x-1)
+print(x*2)
+print(x**2)
+x+=1
+print(x)
+x*=2
+print(x)
+
+
+
+t = True
+f = False
+print(type(t))
+print ( t and f)
+print ( t or f)
+print (not t )
+print ( t != f)
