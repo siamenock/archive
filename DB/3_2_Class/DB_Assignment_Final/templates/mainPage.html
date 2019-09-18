@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form</title>
+    </head>
+    <body>
+            {% if login[0] != -1 %}
+            <br>
+            <big>
+                ---------------------------------------
+                <br>
+                구매자 계정 정보
+            </big>
+            
+            <table>
+                <tr>
+                    <th> 이메일 </th>
+                    <th> 비밀번호 </th>
+                    <th> 이름 </th>
+                    <th> 전화번호 </th>
+                </tr>
+                <tr>
+                    <form action="/updatePersonalInfo" method='POST'>
+                        <input type="hidden" name="idType" value=0>
+                        <th> {{data_customer[0][0]}} </th>
+                        <th> <input type="text" value='{{data_customer[0][1]}}' name='passwd'>   </th>
+                        <th> <input type="text" value='{{data_customer[0][2]}}' name='name'>     </th>
+                        <th> <input type="text" value='{{data_customer[0][3]}}' name='phone'>    </th>
+                        <th> <input type="submit" value="개인정보 변경">                        </th>
+                    </form>
+                </tr>
+                
+            </table>
+            현재 주문 내역 
+            <table>
+                <tr>
+                    <th>  </th>
+                    <th> 가게명 </th>
+                    <th> 배달원 </th>
+                    <th> 결재방식 </th>
+                    <th> 금액 </th>
+                    <th> 주문목록 </th>
+                </tr>
+                {% for row in data_customer[1] %}
+                <tr>
+                    <th>
+                        <form action="/finOrder" method='POST'>
+                            <input type="hidden" value={{row[0]}} name='idOrder'>
+                            <input type="hidden" value='main' name='from'>
+                            <input type="submit" value="수령완료">
+                        </form>
+                    </th>
+                    {% for col in row[1::] %}
+                    <th> {{col}} </th>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br>
+            <form action="/searchStore" method='POST'>
+                <input type="hidden" value="" name='tag'>
+                <input type="hidden" value="" name='name'>
+                <input type="submit" value="근처 가게 찾기">
+            </form>
+            <br>
+            <br>
+            {% endif %}
+
+
+            {% if login[1] != -1 %}
+            <br>
+            <big>
+                ---------------------------------------
+                <br>
+                판매자 계정 정보
+            </big>
+            <table>
+                    <tr>
+                            <th> 이메일 </th>
+                            <th> 비밀번호 </th>
+                            <th> 이름 </th>
+                            <th> 전화번호 </th>
+                        </tr>
+                        <tr>
+                                <form action="/updatePersonalInfo" method='POST'>
+                                    <input type="hidden" name="idType" value=1>
+                                    <th> {{data_seller[0][0]}} </th>
+                                    <th> <input type="text" value='{{data_seller[0][1]}}' name='passwd'>   </th>
+                                    <th> <input type="text" value='{{data_seller[0][2]}}' name='name'>     </th>
+                                    <th> <input type="text" value='{{data_seller[0][3]}}' name='phone'>    </th>
+                                    <th> <input type="submit" value="개인정보 변경">                        </th>
+                                </form>
+                            </tr>
+                
+            </table>
+            내 가게 목록
+            
+            <table>
+                <tr>
+                        
+                    <th> 가게명 </th>
+                    <th> 소개 </th>
+                    <th> 위도 </th>
+                    <th> 경도 </th>
+                </tr>
+                {% for row in data_seller[1] %}
+                <tr>
+                    {% for col in row[1::] %}
+                    <th> {{col}} </th>
+                    {% endfor %}
+                    <th>
+                        <form action="/manageStore" method='POST'>
+                            <input type="hidden" value= {{row[0]}} name = 'idStore'>
+                            <input type="submit" value="관리">
+                        </form>
+                    </th>
+                </tr>
+                {% endfor %}
+            </table>
+            <br>
+            가게 추가
+            <form action="/addStore" method='POST'>
+                가게 이름 <input type='text' name='name'     placeholder="10자 이내"> <br>
+                가게 소개 <input type='text' name='descript' placeholder="60자 이내"> <br>
+                <input type="submit" value="가게 등록">
+                메뉴는 가게를 추가한 뒤 다음단계에서 추가할 수 있습니다.
+            </form>
+            <br>
+            {% endif %}
+            {% if login[2] != -1 %}
+            <br>
+            <big>
+                ---------------------------------------
+                <br>
+                배달자 계정 정보
+            </big>
+            <table>
+                <tr>
+                    <th> 이메일 </th>
+                    <th> 비밀번호 </th>
+                    <th> 이름 </th>
+                    <th> 전화번호 </th>
+                </tr>
+                <tr>
+                        <form action="/updatePersonalInfo" method='POST'>
+                            <input type="hidden" name="idType" value=2>
+                            <th> {{data_delivery[0][0]}} </th>
+                            <th> <input type="text" value='{{data_delivery[0][1]}}' name='passwd'>   </th>
+                            <th> <input type="text" value='{{data_delivery[0][2]}}' name='name'>     </th>
+                            <th> <input type="text" value='{{data_delivery[0][3]}}' name='phone'>    </th>
+                            <th> <input type="submit" value="개인정보 변경">                        </th>
+                        </form>
+                    </tr>
+                
+            </table>
+            배달하기로 한 주문 내역 
+            <table>
+                    <tr>
+                            <th> 가게명 </th>
+                            <th> 고객명 </th>
+                            <th> 결재방식 </th>
+                            <th> 금액 </th>
+                            <th> 배달 </th>
+                            <th> 좌표 </th>
+                            <th> 상세메뉴 </th>
+                        </tr>
+                {% for row in data_delivery[1] %}
+                <tr>
+                    {% for col in row[1::] %}
+                    <th> {{col}} </th>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+            <br>
+            <br>
+        {% endif %}
+                    
+        <script>
+
+        </script>
+    </body>
+</html>

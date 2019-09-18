@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form</title>
+    </head>
+    <body>
+        <form action="/searchStore" method='POST'>
+            <input type="text"   placeholder= "검색할 태그" name = 'tag'>
+            <input type="text"   placeholder= "가게 이름"   name = 'name'>
+            <input type="submit" value="가게검색">
+        </form>
+        <table>
+            <tr>
+                    <th>가게명</th>
+                    <th>설명</th>
+                    <th>위도</th>
+                    <th>경도</th>
+            </tr>
+            {% for row in store_list %}
+            <tr>
+                {% for col in row[2::] %}
+                    <th> {{col}} </th>
+                {% endfor %}
+                <th>
+                <form action="/visitStore" method='POST'>
+                    <input type="hidden" value= {{row[0]}} name = 'idStore'>
+                    <input type="submit" value="가게 보기">
+                </form>
+                </th>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <script>
+
+        </script>
+    </body>
+</html>

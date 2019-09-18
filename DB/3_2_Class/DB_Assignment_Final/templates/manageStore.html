@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form</title>
+    </head>
+    <body>
+            
+            가게 정보            
+            <table>
+                <tr>
+                        
+                    <th> 가게명 </th>
+                    <th> 소개 </th>
+                    <th> 위도 </th>
+                    <th> 경도 </th>
+                </tr>
+                
+                <tr>
+                    {% for col in store[0][2::] %}
+                    <th> {{col}} </th>
+                    {% endfor %}
+                </tr>
+            </table>
+            
+            <br>
+            메뉴 목록
+            <table>
+                {% for row in menu_list %}
+                <tr>
+                    {% for col in row[2::] %}
+                    <th> {{col}} </th>
+                    {% endfor %}
+                    <th>
+                        <form action="/delMenu" method='POST'>
+                            <input type="hidden" name='idStore' value = {{store[0][0]}}>
+                            <input type="hidden" name='idMenu'  value = {{row[0]}}>
+                            <input type="submit" value="삭제">
+                        </form>
+                    </th>
+                </tr>
+                {% endfor %}
+                <form action="/addMenu" method='POST'>
+                <tr>
+                    <input type="hidden" name='idStore' value = {{store[0][0]}}>
+                    <th>
+                        <input type="text" name='name'     placeholder="메뉴명">
+                    </th>
+                    <th>
+                        <input type="number" name='price'     placeholder="가격">
+                    </th>
+                    <th>
+                        <input type="submit" value="추가">
+                    </th>
+                </tr>
+                </form>
+            </table>
+
+            <br>
+            주문 정보
+            <table>
+                <tr>
+                    <th> 배달부 </th>
+                    <th> 결재방식 </th>
+                    <th> 총액 </th>
+                    <th> 상세내역 </th>
+                </tr>
+                {% for row in order_list %}
+                <tr>
+                    {% if row[1] != None %}
+                    <th> {{row[1]}} </th>
+                    {% else %}
+                    <th>
+                        <form action="/assignDelivery" method='POST'>
+                            <select name='idDelivery'>
+                                {% for d in delivery_list %}
+                                <option value={{d[0]}}>{{d[1]}}</option>
+                                {% endfor %}
+                            </select>
+                            <input type="hidden" value= {{row[0]}}   name = 'idOrder'>
+                            <input type="hidden" value= {{store[0][0]}} name = 'idStore'>
+                            <input type="submit" value="에게 배달요청">
+                        </form>
+                    </th>
+                    {% endif %}
+                    {% for col in row[2::] %}
+                    <th> {{col}} </th>
+                    {% endfor %}
+                    <th>
+                    <form action="/finOrder" method='POST'>
+                        <input type="hidden" value={{row[0]}} name='idOrder'>
+                        <input type="hidden" value='manageStore' name='from'>
+                        <input type="hidden" value= {{store[0][0]}} name = 'idStore'>
+                        <input type="submit" value="주문거부">
+                    </form>
+                    </th>
+                    
+                </tr>
+                {% endfor %}
+            </table>
+                    
+        <script>
+
+        </script>
+    </body>
+</html>

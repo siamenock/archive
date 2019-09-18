@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form</title>
+    </head>
+    <body>
+        <form action="/logIn" method="POST" id="log">
+            LOG IN
+            <br>
+            email   <input name="email"         type="email">
+            password<input name="passwd"        type="password">
+            <br>
+            <input type="submit">
+        </form>
+        <br><br>
+        <br><br>
+        <form action="/signIn" method="POST" id="signIn">
+            --------------------------
+            <br>
+            <select name="accountType">
+                <option value="Customer">Customer</option>
+                <option value="Seller"  >Seller</option>
+                <option value="Delivery">Delivery</option>
+            </select>
+            로 회원가입
+            <br>
+            email   <input name="email"         type="email">
+            <br>
+            password<input name="password"      type="text" placeholder="password">
+            <br>
+            name    <input name="name"          type="text">
+            <br>
+            phonenum<input name="phone"         type="text">
+            <br>
+            <input type="submit">
+        </form>
+        
+
+        <br><br><br><br>
+        DB 초기화 버튼 (코드상에 DB Connect 정보가 입력된 상태여야 함)
+        <br>
+        <form action="/reset" method="POST">
+            <input type="submit" value="모든 table drop 후 재생성, 샘플데이터 입력">
+        </form>
+        
+        <script>
+            navigator.geolocation.getCurrentPosition(function(position){
+                document.wirte(position.coords.latitude + "," + position.coords.longitude)
+                alert(position.coords.latitude + "," + position.coords.longitude)
+            });
+
+            let form = document.getElementById("log");
+            form.onsubmit = function(){
+                if(!form.email.value){
+                    alert("missing email!")
+                    return false;
+                }
+                if(! form.password.value){
+                    alert("missing password!")
+                    return false;
+                }
+                // 원래대로라면 여기에 암호화 모듈이 붙는다.
+                return true;
+            };
+            let form = document.getElementById("sign");
+            form.onsubmit = function(){
+                if(! form.agreement.checked){
+                    alert("checkbox not checked")
+                    return false;
+                }
+            }
+        </script>
+    </body>
+</html>

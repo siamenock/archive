@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form</title>
+    </head>
+    <body>
+        <table>
+            <tr>
+                {% for col in store[2::] %}
+                    <th> {{col}} </th>
+                {% endfor %}
+            </tr>
+        </table>
+        <br>
+        메뉴 목록
+        <form action="/makeOrder" method='POST' id='makeOrder'>
+            
+            <table>
+                    {% if menu_len > 0 : %}
+                    <tr>
+                        {% for col in menu_list[0][2::] %}
+                        <th> {{col}} </th>
+                        {% endfor %}
+                        <th>
+                            <input type="hidden" name='idMenu0' value = {{menu_list[0][0]}}>
+                            <input type="number" name='count0'  value = 0>
+                            
+                        </th>
+                    </tr>
+                    {% endif %}
+                    {% if menu_len > 1 : %}
+                    <tr>
+                        {% for col in menu_list[1][2::] %}
+                        <th> {{col}} </th>
+                        {% endfor %}
+                        <th>
+                            <input type="hidden" name='idMenu1' value = {{menu_list[1][0]}}>
+                            <input type="number" name='count1'  value = 0>
+                            
+                        </th>
+                    </tr>
+                    {% endif %}
+                    {% if menu_len > 2 : %}
+                    <tr>
+                        {% for col in menu_list[2][2::] %}
+                        <th> {{col}} </th>
+                        {% endfor %}
+                        <th>
+                            <input type="hidden" name='idMenu2' value = {{menu_list[2][0]}}>
+                            <input type="number" name='count2'  value = 0>
+                            
+                        </th>
+                    </tr>
+                    {% endif %}
+                    {% if menu_len > 3 : %}
+                    <tr>
+                        {% for col in menu_list[3][2::] %}
+                        <th> {{col}} </th>
+                        {% endfor %}
+                        <th>
+                            <input type="hidden" name='idMenu3' value = {{menu_list[3][0]}}>
+                            <input type="number" name='count3'  value = 0>
+                            
+                        </th>
+                    </tr>
+                    {% endif %}
+                    {% if menu_len > 4 : %}
+                    <tr>
+                        {% for col in menu_list[4][2::] %}
+                        <th> {{col}} </th>
+                        {% endfor %}
+                        <th>
+                            <input type="hidden" name='idMenu4' value = {{menu_list[4][0]}}>
+                            <input type="number" name='count4'  value = 0>
+                            
+                        </th>
+                    </tr>
+                    {% endif %}
+                    {% if menu_len > 5 : %}
+                    <tr>
+                        {% for col in menu_list[5][2::] %}
+                        <th> {{col}} </th>
+                        {% endfor %}
+                        <th>
+                            <input type="hidden" name='idMenu5' value = {{menu_list[5][0]}}>
+                            <input type="number" name='count5'  value = 0>
+                            
+                        </th>
+                    </tr>
+                    {% endif %}
+                    {% if menu_len > 6 : %}
+                    <tr>
+                        {% for col in menu_list[6][2::] %}
+                        <th> {{col}} </th>
+                        {% endfor %}
+                        <th>
+                            <input type="hidden" name='idMenu6' value = {{menu_list[6][0]}}>
+                            <input type="number" name='count6'  value = 0>
+                            
+                        </th>
+                    </tr>
+                    {% endif %}
+                    {% if menu_len > 7 : %}
+                    <tr>
+                        {% for col in menu_list[7][2::] %}
+                        <th> {{col}} </th>
+                        {% endfor %}
+                        <th>
+                            <input type="hidden" name='idMenu7' value = {{menu_list[7][0]}}>
+                            <input type="number" name='count7'  value = 0>
+                            
+                        </th>
+                    </tr>
+                    {% endif %}
+                    {% if menu_len > 8 : %}
+                    <tr>
+                        {% for col in menu_list[8][2::] %}
+                        <th> {{col}} </th>
+                        {% endfor %}
+                        <th>
+                            <input type="hidden" name='idMenu8' value = {{menu_list[8][0]}}>
+                            <input type="number" name='count8'  value = 0>
+                            
+                        </th>
+                    </tr>
+                    {% endif %}
+                    {% if menu_len > 9 : %}
+                    <tr>
+                        {% for col in menu_list[9][2::] %}
+                        <th> {{col}} </th>
+                        {% endfor %}
+                        <th>
+                            <input type="hidden" name='idMenu9' value = {{menu_list[9][0]}}>
+                            <input type="number" name='count9'  value = 0>
+                            
+                        </th>
+                    </tr>
+                    {% endif %}
+                    {% if menu_len > 10 : %}
+                    <tr>
+                        {% for col in menu_list[10][2::] %}
+                        <th> {{col}} </th>
+                        {% endfor %}
+                        <th>
+                            <input type="hidden" name='idMenu10' value = {{menu_list[10][0]}}>
+                            <input type="number" name='count10'  value = 0>
+                            
+                        </th>
+                    </tr>
+                    {% endif %}
+                    {% if menu_len > 11 : %}
+                    <tr>
+                        {% for col in menu_list[11][2::] %}
+                        <th> {{col}} </th>
+                        {% endfor %}
+                        <th>
+                            <input type="hidden" name='idMenu11' value = {{menu_list[11][0]}}>
+                            <input type="number" name='count11'  value = 0>
+                            
+                        </th>
+                    </tr>
+                    {% endif %}
+
+            </table>
+            <select name="idPayMethod">
+                {% for pay in pay_method_list %}
+                <option value={{pay[0]}}>{{pay[1]}}</option>
+                {% endfor %}
+            </select>
+            <input type="hidden" name="menuLen" value = {{menu_len}}>
+            <input type="hidden" name='idStore' value = {{store[0][0]}}>
+            <input type="submit" value="주문하기">
+        </form>
+        <script>
+            
+        </script>
+    </body>
+</html>
